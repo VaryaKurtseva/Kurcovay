@@ -1,4 +1,4 @@
-ame: CI for Dev on Push
+name: CI for Dev on Push
 
 on:
   push:
