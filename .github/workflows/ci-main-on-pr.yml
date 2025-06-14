@@ -1,22 +1,26 @@
-name: CI for Main on PR
+name: CI for main PR
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'gradle'   # Кэшируем зависимости
+          distribution: temurin
+          java-version: 17
 
-      - name: Grant gradlew permissions
+      - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: Build and test with Gradle
+        run: ./gradlew clean build
